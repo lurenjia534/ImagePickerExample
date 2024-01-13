@@ -59,24 +59,27 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ImagePickerExample() {
-    val pickMedia = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        if (uri != null) {
-            Log.d("PhotoPicker", "Selected URI: $uri")
-        } else {
-            Log.d("PhotoPicker", "No media selected")
+    val pickMedia =
+        rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            if (uri != null) {
+                Log.d("PhotoPicker", "Selected URI: $uri")
+            } else {
+                Log.d("PhotoPicker", "No media selected")
+            }
         }
-    }
 
-    Column(modifier = Modifier.padding(16.dp),
+    Column(
+        modifier = Modifier.padding(16.dp),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        horizontalAlignment = Alignment.CenterHorizontally,
+
+    ) {
         // 按钮：选择图片和视频
         Button(
             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surface),
             onClick = {
-            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageAndVideo))
-        }) {
+                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageAndVideo))
+            }) {
             Text("Pick Image or Video", color = MaterialTheme.colorScheme.onPrimaryContainer)
         }
 
@@ -84,8 +87,8 @@ fun ImagePickerExample() {
         Button(
             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surface),
             onClick = {
-            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-        }) {
+                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            }) {
             Text("Pick Image Only", color = MaterialTheme.colorScheme.onPrimaryContainer)
         }
 
@@ -93,9 +96,9 @@ fun ImagePickerExample() {
         Button(
             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surface),
             onClick = {
-            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.VideoOnly))
-        }) {
-            Text("Pick Video Only",color = MaterialTheme.colorScheme.onPrimaryContainer)
+                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.VideoOnly))
+            }) {
+            Text("Pick Video Only", color = MaterialTheme.colorScheme.onPrimaryContainer)
         }
 
         // 按钮：选择特定MIME类型（如GIF）
@@ -103,17 +106,27 @@ fun ImagePickerExample() {
         Button(
             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surface),
             onClick = {
-            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.SingleMimeType(mimeType)))
-        }) {
-            Text("Pick GIF",color = MaterialTheme.colorScheme.onPrimaryContainer)
+                pickMedia.launch(
+                    PickVisualMediaRequest(
+                        ActivityResultContracts.PickVisualMedia.SingleMimeType(
+                            mimeType
+                        )
+                    )
+                )
+            }) {
+            Text("Pick GIF", color = MaterialTheme.colorScheme.onPrimaryContainer)
         }
         Button(
             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surface),
-            onClick = {pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))},
-            ) {
+            onClick = { pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) },
+        ) {
             Icon(imageVector = Icons.Default.Share, contentDescription = null, tint = Color.Black)
             Spacer(modifier = Modifier.width(8.dp))
-            Text(text = "Share image", color = MaterialTheme.colorScheme.onPrimaryContainer, fontFamily = FontFamily.Serif)
+            Text(
+                text = "Share image",
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                fontFamily = FontFamily.Serif
+            )
         }
     }
 }
