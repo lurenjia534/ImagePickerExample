@@ -86,7 +86,7 @@ fun ImagePickerExample() {
                 Log.d("PhotoPicker", "No media selected")
             }
         }
-    val pickMedias = rememberLauncherForActivityResult(contract = ActivityResultContracts.PickMultipleVisualMedia()){}
+    val pickMedias = rememberLauncherForActivityResult(contract = ActivityResultContracts.PickMultipleVisualMedia(9)){}
 
     Column(
         modifier = Modifier.padding(16.dp),
